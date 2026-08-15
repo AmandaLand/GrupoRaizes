@@ -64,6 +64,22 @@ Situações críticas não seguem automaticamente para o ERP. A central de diver
 
 <img src="docs/screenshots/divergencias.png" alt="Central de divergências e aprovação humana" width="100%">
 
+## Relatórios e extrações
+
+Os filtros globais são aplicados às tabelas e exportações. A página de Relatórios permite baixar em CSV:
+
+- apuração consolidada;
+- divergências da seleção atual;
+- memória de cálculo.
+
+<img src="docs/screenshots/relatorios.png" alt="Relatórios e exportações da POC" width="100%">
+
+## Cadastro de premissas
+
+As premissas são inseridas em **Regras de negócio → Criar regra**. O formulário valida nome, cliente, operação, mínimo contratado, valor unitário e descrição da regra. Depois de salva, a nova premissa aparece na lista e fica disponível para a demonstração do motor de faturamento durante a sessão.
+
+Uma nova competência é criada pelo botão **Nova execução**. A execução define operação, modalidade, competência e período antes de seguir para captação e apuração.
+
 ## Telas disponíveis
 
 | Tela | Finalidade |
@@ -78,6 +94,7 @@ Situações críticas não seguem automaticamente para o ERP. A central de diver
 | Divergências | Conferência e aprovação humana |
 | Notas fiscais | Preparação da execução no Teknisa |
 | Boletos e cobranças | Geração e envio das cobranças |
+| Relatórios | Exportação filtrada da apuração, divergências e memória de cálculo |
 | Auditoria | Rastreabilidade das ações automáticas e humanas |
 | Configurações | Proteções e limites do ambiente demonstrativo |
 

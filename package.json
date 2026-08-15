@@ -10,12 +10,15 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.9.0",
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "typescript": "latest",
+    "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "lucide-react": "latest"
+    "react-hook-form": "^7.85.0",
+    "typescript": "latest",
+    "vite": "latest",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/react": "latest",
