@@ -36,6 +36,11 @@ const nav = [
   ['Auditoria', ShieldCheck], ['Configurações', Settings],
 ] as const;
 
+const initialPage = () => {
+  const requested = decodeURIComponent(window.location.hash.slice(1));
+  return nav.some(([label]) => label === requested) ? requested : 'Visão geral';
+};
+
 const stages = [
   { label: 'Captura', count: 5, state: 'done' }, { label: 'Regras e IA', count: 5, state: 'done' },
   { label: 'Apuração', count: 5, state: 'done' }, { label: 'Validação', count: 4, state: 'active' },
@@ -107,7 +112,7 @@ function DashboardCharts({ operation }: { operation: Operation }) {
 export function App() {
   const [operation, setOperation] = useState<Operation>('Todas');
   const [modality, setModality] = useState<Modality>('Todas');
-  const [activeNav, setActiveNav] = useState('Visão geral');
+  const [activeNav, setActiveNav] = useState(initialPage);
   const [toast, setToast] = useState<string | null>(null);
   const [collapsed, setCollapsed] = useState(false);
 
