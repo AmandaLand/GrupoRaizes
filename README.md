@@ -1,160 +1,41 @@
-# Grupo Raízes — Faturamento Inteligente
+# Faturamento Inteligente — Grupo Raízes
 
-POC navegável para validar a automação do faturamento das operações **Cucinari** e **Quitanda Escolas**, desde a captura dos dados até a preparação de notas fiscais, boletos e cobranças.
+POC navegável do novo fluxo de faturamento das operações **Cucinari** e **Quitanda Escolas**.
 
-> Ambiente demonstrativo: os dados são fictícios e as integrações com Oracle/Teknisa, catracas, emissão fiscal e cobrança estão simuladas.
-
-## O desafio
-
-O processo atual combina dados do ERP, planilhas individuais por cliente, regras contratuais e um RPA legado. A POC demonstra como centralizar essa operação em um fluxo seguro e auditável:
-
-```text
-Captura → Regras e IA → Apuração → Validação humana
-        → Aprovação → Teknisa → Nota fiscal → Cobrança → Auditoria
-```
-
-O sistema contempla:
-
-- **Cucinari:** contratos, consumo real, mínimos contratuais e complementos de faturamento.
-- **Quitanda Escolas — Pré-pago:** planos e pacotes contratados pelos responsáveis.
-- **Quitanda Escolas — Pós-pago:** consumo efetivamente registrado pelas catracas.
-
-## Visão geral
-
-A tela inicial concentra o estado da competência: valor apurado, clientes processados, aprovações, divergências, pipeline operacional e itens que exigem atenção.
-
-<img src="docs/screenshots/visao-geral.png" alt="Visão geral da POC de faturamento" width="100%">
-
-## Dashboard gerencial
-
-O dashboard apresenta três leituras complementares:
-
-- faturamento por operação em barras;
-- evolução dos últimos seis meses em linha;
-- distribuição entre aprovados, revisões e divergências em rosca.
-
-Os gráficos respondem aos filtros globais de operação e modalidade.
-
-<img src="docs/screenshots/dashboard.png" alt="Dashboard com gráficos financeiros e operacionais" width="100%">
-
-## Regras de negócio
-
-Centraliza as condições hoje distribuídas em planilhas. A proposta permite vincular regras ao cliente ou à operação, controlar versões e cadastrar uma condição contratual inédita sem alterar código.
-
-<img src="docs/screenshots/regras-de-negocio.png" alt="Gestão das regras de faturamento" width="100%">
-
-## Apuração explicável
-
-O motor combina cliente, contrato, consumo, período e regras. Cada resultado apresenta os valores utilizados e uma justificativa compreensível para o time financeiro.
-
-<img src="docs/screenshots/faturamento.png" alt="Apuração de faturamento explicada pela IA" width="100%">
-
-Exemplo demonstrado:
-
-| Informação | Valor |
-|---|---:|
-| Consumo realizado | 8.500 refeições |
-| Mínimo contratual | 10.000 refeições |
-| Diferença | 1.500 refeições |
-| Complemento calculado | R$ 25.005,00 |
-
-## Divergências e aprovação humana
-
-Situações críticas não seguem automaticamente para o ERP. A central de divergências apresenta severidade, contexto e ações para revisar, editar, reprocessar ou aprovar.
-
-<img src="docs/screenshots/divergencias.png" alt="Central de divergências e aprovação humana" width="100%">
-
-## Relatórios e extrações
-
-Os filtros globais são aplicados às tabelas e exportações. A página de Relatórios permite baixar em CSV:
-
-- apuração consolidada;
-- divergências da seleção atual;
-- memória de cálculo.
-
-<img src="docs/screenshots/relatorios.png" alt="Relatórios e exportações da POC" width="100%">
-
-## Cadastro de premissas
-
-As premissas são inseridas em **Regras de negócio → Criar regra**. O formulário valida nome, cliente, operação, mínimo contratado, valor unitário e descrição da regra. Depois de salva, a nova premissa aparece na lista e fica disponível para a demonstração do motor de faturamento durante a sessão.
-
-Uma nova competência é criada pelo botão **Nova execução**. A execução define operação, modalidade, competência e período antes de seguir para captação e apuração.
-
-## Telas disponíveis
-
-| Tela | Finalidade |
-|---|---|
-| Visão geral | Resumo da competência e pipeline operacional |
-| Dashboard | Indicadores financeiros e operacionais |
-| Execuções | Ciclos de faturamento por competência |
-| Clientes e contratos | Base contratual centralizada |
-| Regras de negócio | Condições, versões e interpretação das regras |
-| Captação de dados | Fontes, volumes e situação das sincronizações |
-| Faturamento | Cálculo e explicação da regra aplicada |
-| Divergências | Conferência e aprovação humana |
-| Notas fiscais | Preparação da execução no Teknisa |
-| Boletos e cobranças | Geração e envio das cobranças |
-| Relatórios | Exportação filtrada da apuração, divergências e memória de cálculo |
-| Auditoria | Rastreabilidade das ações automáticas e humanas |
-| Configurações | Proteções e limites do ambiente demonstrativo |
-
-## Segurança da POC
-
-A interface deixa explícito que:
-
-- nenhuma escrita real é realizada no Oracle/Teknisa;
-- nenhuma nota fiscal ou boleto real é emitido;
-- a aprovação humana é obrigatória antes da etapa de execução;
-- todas as ações da demonstração utilizam dados fictícios;
-- a integração real deverá começar com acesso somente leitura e uma competência já encerrada.
-
-## Executar localmente
-
-Requisitos: Node.js 20 ou superior.
+## Executar
 
 ```bash
 npm install
-npm run dev
+npm run dev -- --port 7277
 ```
 
-A aplicação ficará disponível no endereço informado pelo Vite, normalmente:
+Acesse: `http://localhost:7277`
 
-```text
-http://localhost:5173
-```
+No Windows, o arquivo `iniciar-ambiente.bat` inicia o servidor e abre o navegador automaticamente.
 
-Para gerar o pacote de produção:
+## Fluxo disponível
+
+- Login demonstrativo.
+- Seleção do ambiente Cucinari ou Quitanda Escolas.
+- Cucinari com Indústrias Aurora, Hospital Santa Clara e Grupo Horizonte.
+- Memória de cálculo por cenário.
+- Boletos simulados, sem valor fiscal ou bancário.
+- Quitanda com três colégios, cinco alunos por colégio, RA/crachá e modalidades pré/pós-pago.
+
+Os valores e documentos são fictícios. Não há integração ativa com bancos, sistemas fiscais ou Teknisa.
+
+## Documentação vigente
+
+O fluxo funcional, as premissas, decisões pendentes e o backlog estão em:
+
+- [`docs/NOVO_FLUXO_E_BACKLOG.md`](docs/NOVO_FLUXO_E_BACKLOG.md)
+
+## Validação
 
 ```bash
+npm run typecheck
+npm test
 npm run build
 ```
 
-## Links diretos para demonstração
-
-Com o servidor local em execução, é possível abrir diretamente algumas telas:
-
-- `http://localhost:5173/#Visão%20geral`
-- `http://localhost:5173/#Dashboard`
-- `http://localhost:5173/#Regras%20de%20negócio`
-- `http://localhost:5173/#Faturamento`
-- `http://localhost:5173/#Divergências`
-
-## Escopo recomendado para a próxima fase
-
-1. Selecionar uma competência já encerrada.
-2. Escolher dois ou três clientes Cucinari com regras diferentes.
-3. Selecionar uma escola pré-paga e uma pós-paga.
-4. Conectar as fontes em modo somente leitura.
-5. Comparar os cálculos da solução com as planilhas homologadas.
-6. Validar divergências e aprovações com o time financeiro.
-7. Somente depois da homologação, evoluir para a execução no Teknisa.
-
-## Documentação detalhada
-
-O material completo para apresentação ao cliente, incluindo validação tela a tela, lacunas e critérios de sucesso, está em:
-
-[APRESENTACAO_POC_GRUPO_RAIZES.md](APRESENTACAO_POC_GRUPO_RAIZES.md)
-
----
-
-Desenvolvido como prova de conceito para o **Grupo Raízes**, com foco em redução do trabalho manual, aplicação segura de regras contratuais, controle humano e rastreabilidade.
+O projeto ainda não possui arquivos de teste automatizado; esse item está registrado no backlog.
