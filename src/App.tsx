@@ -140,7 +140,8 @@ function StudentBoleto({ bill, onClose }: { bill: StudentBill; onClose: () => vo
 }
 
 function Quitanda({ onChangeOperation }: { onChangeOperation: () => void }) {
-  const [view, setView] = useState<SchoolView>('dashboard');
+  const preview = new URLSearchParams(window.location.search).get('preview');
+  const [view, setView] = useState<SchoolView>(preview === 'quitanda-cobrancas' ? 'billing' : preview === 'quitanda-escolas' ? 'schools' : 'dashboard');
   const [statement, setStatement] = useState<School | null>(null);
   const [studentBill, setStudentBill] = useState<StudentBill | null>(null);
   const pageTitle = view === 'dashboard' ? 'Visão geral' : view === 'schools' ? 'Escolas e alunos' : 'Cobranças escolares';
@@ -148,9 +149,10 @@ function Quitanda({ onChangeOperation }: { onChangeOperation: () => void }) {
 }
 
 export function App() {
-  const [authenticated, setAuthenticated] = useState(false);
-  const [operation, setOperation] = useState<Operation | null>(null);
-  const [view, setView] = useState<View>('overview');
+  const preview = new URLSearchParams(window.location.search).get('preview');
+  const [authenticated, setAuthenticated] = useState(preview !== null);
+  const [operation, setOperation] = useState<Operation | null>(preview?.startsWith('cucinari') ? 'Cucinari' : preview?.startsWith('quitanda') ? 'Quitanda Escolas' : null);
+  const [view, setView] = useState<View>(preview === 'cucinari-calculo' ? 'calculation' : preview === 'cucinari-boletos' ? 'billing' : 'overview');
   if (!authenticated) return <Login onLogin={() => setAuthenticated(true)}/>;
   if (!operation) return <OperationChoice onChoose={setOperation} onLogout={() => setAuthenticated(false)}/>;
   if (operation === 'Quitanda Escolas') return <Quitanda onChangeOperation={() => setOperation(null)}/>;
