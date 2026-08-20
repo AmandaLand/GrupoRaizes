@@ -64,11 +64,11 @@ function OperationChoice({ onChoose, onLogout }: { onChoose: (operation: Operati
     <section><span>SELEÇÃO DE AMBIENTE</span><h1>Qual operação deseja acessar?</h1><p>Cada ambiente possui clientes, regras e cobranças independentes.</p>
       <div className="operation-grid">
         <button onClick={() => onChoose('Cucinari')}>
-          <div className="operation-visual"><img src="/assets/logo-cucinari.png" alt="Cucinari — gastronomia afetiva"/></div>
+          <div className="operation-visual"><img src={`${import.meta.env.BASE_URL}assets/logo-cucinari.png`} alt="Cucinari — gastronomia afetiva"/></div>
           <div className="operation-copy"><em>OPERAÇÃO CORPORATIVA</em><h2>Cucinari</h2><p>Contratos, refeições diárias, públicos atendidos e adicionais.</p><strong>3 clientes demonstrativos <ChevronRight size={17}/></strong></div>
         </button>
         <button onClick={() => onChoose('Quitanda Escolas')}>
-          <div className="operation-visual quitanda-visual"><img src="/assets/logo-quitanda-escolas.webp" alt="Quitanda Escolas"/></div>
+          <div className="operation-visual quitanda-visual"><img src={`${import.meta.env.BASE_URL}assets/logo-quitanda-escolas.webp`} alt="Quitanda Escolas"/></div>
           <div className="operation-copy"><em>OPERAÇÃO ESCOLAR</em><h2>Quitanda Escolas</h2><p>Alunos identificados por RA ou crachá, pré-pago e pós-pago.</p><strong>3 colégios • 15 alunos <ChevronRight size={17}/></strong></div>
         </button>
       </div>
